@@ -1,7 +1,51 @@
-body{
-  text-align: center;
+.title{
+  margin-left: 40px;
+  margin-top: 10px;
+  margin-bottom: 6px;
+  position: relative;
 }
 
 .caro{
   display: none;
+}
+
+.earthDay, .weatherReport, .title{
+  display: inline-block;
+}
+
+.earthDay{
+  margin-left:3%;
+}
+
+.marsSol{
+  margin-left: 3%;
+}
+
+.carousel-inner > .item > img, .carousel-inner > .item > a > img {
+    width: 100%;
+    margin: auto;
+}
+
+@media (min-width: 992px)
+.container {
+    width: 100%;
+}
+
+.weatherReport{
+  display: none;
+  padding: 20px;
+  float:right;
+  margin-top: 20px;
+  border: 1px solid #000;
+  margin-right:1%;
+
+}
+
+.glyphicon-chevron-right:before {
+    content: "\e080";
+    display: none;
+}
+.glyphicon-chevron-left:before {
+    content: "\e080";
+    display: none;
 }
