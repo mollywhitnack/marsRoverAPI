@@ -23,12 +23,12 @@
   </head>
 
   <span class = "title"><h1>Curiosity</h1></span>
-  <span class="earthDay">Earth Date: <input type ="date" class = "dayInput"><button class= "submitDay btn btn-secondary">Search</button> 
+  <span class="earthDay">Earth Date: <input type ="date" class = "dayInput" value="2015-06-03"> <button class= "submitDay btn btn-primary">Search</button> 
   </span>
   <div class = "weatherReport"></div>
   <!--make number of mars sols dynamic-->
   <div class="marsSol">Camera 
-  <select name="cameralist" form="cameraform" class = "cameraList">
+  <select class = "cameraList selectpicker" " form="cameraform" >
    <option value="FHAZ">Front Hazard Avoidance Camera</option>
    <option value="RHAZ">Rear Hazard Avoidance Camera  </option>
    <option value="MAST">Mast Camera</option>
@@ -37,8 +37,8 @@
    <option value="MARDI">Mars Descent Imager</option>
    <option value="NAVCAM">Navigation Camera</option>
   </select> Martian Sol (0-1366): 
-  <input type = "number" class = solInput>
-  <button class= "submitSol btn btn-secondary">Search</button></div>
+  <input type = "number" class = solInput value="1300">
+  <button class= "submitSol btn btn-primary">Search</button></div>
 
 
 
