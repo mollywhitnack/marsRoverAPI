@@ -67,5 +67,12 @@ body{
   width:80px;
 }
 
+.alert-warning{
+  display:none;
+}
+
+.weatherWarn{
+  display:none;
+}
 
 

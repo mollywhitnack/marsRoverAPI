@@ -1,6 +1,6 @@
 'use strict'
 
-var weatherURL ='' ;//`http://marsweather.ingenology.com/v1/archive/?format=jsonp`;
+var weatherURL =`http://marsweather.ingenology.com/v1/archive/?format=jsonp`;
 var found  =false;
 var dayforW =''
 var dayBool = false;
@@ -16,7 +16,8 @@ function init(){
 }
 
 function dayImages(){
-  weatherURL = `http://marsweather.ingenology.com/v1/archive/?format=jsonp`;
+  $('.alert-warning').hide();
+  //weatherURL = `http://marsweather.ingenology.com/v1/archive/?format=jsonp`;
   dayBool = true;
   solBool = false;
   found = false;
@@ -24,7 +25,6 @@ function dayImages(){
   $('.tempTarget').empty();
   var day = $('.dayInput').val();
   dayforW = day;
-  weather();
   var nDate  = [];
   var date = day.split('-');
   for(let i=0; i<date.length; i++){
@@ -39,7 +39,7 @@ function dayImages(){
   $.get(`https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=${nDate}&api_key=MinS57PfHb5uC8drEsRM4zEk3SoQSq57p4N7juwu`)
   .done(function(data){
     var length = data.photos.length;
-
+    weather();
     for(let i =0; i<length; i++){
       var url = (data.photos[i].img_src).toString();
       var $li2 = $('.templateTarget').clone();
@@ -60,23 +60,26 @@ function dayImages(){
    })
    .fail(function(){
     console.log('earth day Error!');
+    $('.alert-warning').show();
+    $('.weatherReport').hide();
     //alert("No images available, please refine your search!");
    });
 }
 
 
 function solImages(){
-  weatherURL = `http://marsweather.ingenology.com/v1/archive/?format=jsonp`;
+  $('.alert-warning').hide();
+  //weatherURL = `http://marsweather.ingenology.com/v1/archive/?format=jsonp`;
   dayBool = false;
   solBool = true;
   found = false;
   $('.tempImage').empty();
   $('.tempTarget').empty();
   sol = $('.solInput').val();
-  weather();
   var camera = $('.cameraList').val();
   $.get(`https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=${sol}&camera=${camera}&api_key=MinS57PfHb5uC8drEsRM4zEk3SoQSq57p4N7juwu`)
   .done(function(data){
+    weather();
     //console.log("data: " ,data);
     var length = data.photos.length;
     console.log("length:", length);
@@ -98,7 +101,9 @@ function solImages(){
    })
    .fail(function(){
     console.log('Mars sol Error!');
-    alert("No images available, please refine your search!");
+    //alert("No images available, please refine your search!");
+    $('.alert-warning').show();
+    $('.weatherReport').hide();
    });
 }
 
@@ -108,15 +113,15 @@ function weather(){
   if(dayBool == true){
     $('.weatherReport').text(`...Loading Weather for ${dayforW}`);
     $('.weatherReport').show();
-
-    //console.log("weather");
     $.ajax({
     url: weatherURL,
     method: 'GET', //defualt  is get, dont really need this
     dataType: 'jsonp',
     success: function(data){
+      //go through pages
       for(var i = 0; i<data.results.length; i++){
           //console.log(data.results[i].terrestrial_date);
+          console.log("day: ", data.results[i].terrestrial_date ," vs " , dayforW);
           if(data.results[i].terrestrial_date === dayforW){
             var weatherdata = data.results[i].atmo_opacity;
             var minFar = data.results[i].min_temp_fahrenheit;
@@ -128,6 +133,7 @@ function weather(){
             $('.weatherReport').text('');
             var $h3 = $('<h3>');
             $('.weatherReport').text(`${weatherdata} -- High: ${maxFar} F Low: ${minFar} F`);
+            weatherURL = `http://marsweather.ingenology.com/v1/archive/?format=jsonp`;
           }
         }
         if(found === false){
@@ -138,11 +144,12 @@ function weather(){
         }
     },
     error: function(error){
-      console.log("Weather Error");
+      console.log("Weather Error: " , error);
+      //console.log("Weather Error");
+      //$('.weatherReport').text('No Weather available for this date');
     }
     });
   }
-
   else{
     $('.weatherReport').text(`...Loading Weather for sol ${sol}`);
     $('.weatherReport').show();
@@ -154,6 +161,7 @@ function weather(){
     success: function(data){
       for(var i = 0; i<data.results.length; i++){
           //console.log(data.results[i].sol);
+          console.log("sol: ", sol ," vs " , data.results[i].sol.toString() );
           if(data.results[i].sol.toString() === sol){
             var weatherdata = data.results[i].atmo_opacity;
             var minFar = data.results[i].min_temp_fahrenheit;
@@ -161,9 +169,9 @@ function weather(){
             var maxFar = data.results[i].max_temp_fahrenheit;
             //console.log(maxFar);
             found = true;
+            weatherURL = `http://marsweather.ingenology.com/v1/archive/?format=jsonp`;
             //console.log("Found: ", weatherdata);
             $('.weatherReport').text('');
-            var $h3 = $('<h3>');
             $('.weatherReport').text(`${weatherdata} -- High: ${maxFar} F Low: ${minFar} F`);
           }
         }
@@ -175,7 +183,9 @@ function weather(){
         }
     },
     error: function(error){
-      console.log("Weather Error");
+      console.log("Weather Error: " , error);
+      //$('.weatherReport').text('');
+      //$('.weatherReport').text('No Weather available for this date');
     }
     });
   }
