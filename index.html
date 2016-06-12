@@ -22,9 +22,9 @@
 
   <h1>Mars Rover</h1>
 
-  <div class="earthDay">Search images by Earth Date: <input type ="date" class = "dayInput"><button class= "submitDay">Search</button></div>
+  <div class="earthDay">Search images by Earth Date: <input type ="date" class = "dayInput"><button class= "submitDay btn btn-secondary">Search</button></div>
   <!--make number of mars sols dynamic-->
-  <div class="marsSol">Search images by Mars Sol (0-1366) and Camera<input type = "number" class = solInput>
+  <div class="marsSol">Search images by camer and Martian Sol (0-1366): 
   <select name="cameralist" form="cameraform" class = "cameraList">
    <option value="FHAZ">Front Hazard Avoidance Camera</option>
    <option value="RHAZ">Rear Hazard Avoidance Camera  </option>
@@ -34,8 +34,11 @@
    <option value="MARDI">Mars Descent Imager</option>
    <option value="NAVCAM">Navigation Camera</option>
   </select>
+  <input type = "number" class = solInput>
+  <button class= "submitSol btn btn-secondary">Search</button></div>
+  <button class= "weather btn btn-secondary">Get Weather</button>
+  <div class = "weatherReport"></div>
 
-  <button class= "submitSol">Search</button></div>
 
 
   <meta charset="utf-8">
