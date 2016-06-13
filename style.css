@@ -24,31 +24,24 @@ body{
 }
 
 .marsSol{
-  margin-left: 4%;
+  margin-left: 45px;
 }
-
-.carousel-inner > .item > img, .carousel-inner > .item > a > img {
-    width: 95%;
-    margin: auto;
-}
-
-
 
 .weatherReport{
-  display: none;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  font-size: 120%;
-  float:right;
-  margin-top: 20px;
-  border: 1px solid #000;
-  margin-right:7%;
-  background-color: white;
-  border-radius: 5px 5px 5px 5px;
+    display: none;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 120%;
+    border: 1px solid #000;
+    background-color: white;
+    float: right;
+    border-radius: 5px 5px 5px 5px;
+    margin-top: -60px;
+    margin-right: 20px;
+  }
 
-}
 
 .glyphicon-chevron-right:before {
     content: "\e080";
@@ -60,7 +53,7 @@ body{
 }
 
 .btn{
-  line-height: 1;
+  line-height: 0.9;
 }
 
 .solInput{
@@ -73,6 +66,26 @@ body{
 
 .weatherWarn{
   display:none;
+}
+
+.active img {
+  width: auto;
+  height: 525px;
+  max-height: 525px;
+}
+
+@media (max-width: 912px){
+  .weatherReport{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    float:center;
+    margin-right: 25%;
+  }
+
+  @media (max-width: 586px){
+  .marsSol{
+      margin-left:3%;
+  }
 }
 
 
