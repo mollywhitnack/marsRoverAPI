@@ -4,7 +4,6 @@ var weatherURL =`http://marsweather.ingenology.com/v1/archive/?format=jsonp`;
 var found  =false;
 var dayforW =''
 var dayBool = false;
-var solBool = false;
 var sol = 0;
 var notThereSol = false;
 
@@ -20,7 +19,7 @@ function dayImages(){
   $('.alert-warning').hide();
   //weatherURL = `http://marsweather.ingenology.com/v1/archive/?format=jsonp`;
   dayBool = true;
-  solBool = false;
+  //solBool = false;
   found = false;
   $('.tempImage').empty();
   $('.tempTarget').empty();
@@ -72,7 +71,7 @@ function solImages(){
   $('.alert-warning').hide();
   //weatherURL = `http://marsweather.ingenology.com/v1/archive/?format=jsonp`;
   dayBool = false;
-  solBool = true;
+  //solBool = true;
   found = false;
   $('.tempImage').empty();
   $('.tempTarget').empty();
@@ -83,7 +82,7 @@ function solImages(){
     weather();
     //console.log("data: " ,data);
     var length = data.photos.length;
-    console.log("length:", length);
+    //console.log("length:", length);
     for(let i =0; i<length; i++){
       var url = (data.photos[i].img_src).toString();
       //console.log(url);
@@ -109,7 +108,7 @@ function solImages(){
 }
 
 function weather(){
-  console.log("solBool: " , solBool);
+  //console.log("solBool: " , solBool);
   console.log("daylBool: " , dayBool);
   if(dayBool == true){
     $('.weatherReport').text(`...Loading Weather for ${dayforW}`);
@@ -122,7 +121,7 @@ function weather(){
       //go through pages
       for(var i = 0; i<data.results.length; i++){
           //console.log(data.results[i].terrestrial_date);
-          console.log("day: ", data.results[i].terrestrial_date ," vs " , dayforW);
+          //console.log("day: ", data.results[i].terrestrial_date ," vs " , dayforW);
           if(data.results[i].terrestrial_date === dayforW){
             var weatherdata = data.results[i].atmo_opacity;
             var minFar = data.results[i].min_temp_fahrenheit;
@@ -155,7 +154,7 @@ function weather(){
   else{
     $('.weatherReport').text(`...Loading Weather for sol ${sol}`);
     $('.weatherReport').show();
-    console.log("url, ", weatherURL );
+    //console.log("url, ", weatherURL );
     $.ajax({
     url: weatherURL,
     method: 'GET', //defualt  is get, dont really need this
@@ -179,7 +178,7 @@ function weather(){
             weatherURL = `http://marsweather.ingenology.com/v1/archive/?format=jsonp`;
             //console.log("Found: ", weatherdata);
             $('.weatherReport').text('');
-            $('.weatherReport').text(`${weatherdata} -- High: ${maxFar} F Low: ${minFar} F`);
+            $('.weatherReport').text(`${weatherdata} High: ${maxFar} F Low: ${minFar} F`);
           }
         }
         if(found === false && notThereSol === false){
