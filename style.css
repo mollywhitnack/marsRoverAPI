@@ -15,6 +15,10 @@ body{
   display: none;
 }
 
+.carousel-inner > .item > img, .carousel-inner > .item > a > img{
+  width: 80%;
+}
+
 .earthDay, .weatherReport, .title{
   display: inline-block;
 }
@@ -74,6 +78,9 @@ body{
   height: 525px;
   max-height: 525px;
 }
+.carousel {
+    background-color: none;
+}
 
 @media (max-width: 1116px){
   .weatherReport{
@@ -85,8 +92,14 @@ body{
 
   @media (max-width: 586px){
   .marsSol{
-      margin-left:3%;
+      margin-left:10%;
+  }
+  .weatherReport{
+    
+    margin-right: 23%;
   }
 }
-
-
+ @media (max-width: 603px){
+.earthDay {
+    margin-left: 10%;
+}}
