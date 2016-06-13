@@ -5,7 +5,7 @@ body{
    background-color:  #e6e6e6;
 }
 .title{
-  margin-left: 40px;
+  margin-left: 10%;
   margin-top: 10px;
   margin-bottom: 6px;
   position: relative;
@@ -24,7 +24,7 @@ body{
 }
 
 .marsSol{
-  margin-left: 45px;
+  margin-left: 10%;
 }
 
 .weatherReport{
@@ -39,7 +39,7 @@ body{
     float: right;
     border-radius: 5px 5px 5px 5px;
     margin-top: -60px;
-    margin-right: 20px;
+    margin-right: 12%;
   }
 
 
@@ -62,6 +62,7 @@ body{
 
 .alert-warning{
   display:none;
+  margin-top: 30px;
 }
 
 .weatherWarn{
@@ -74,12 +75,12 @@ body{
   max-height: 525px;
 }
 
-@media (max-width: 912px){
+@media (max-width: 1116px){
   .weatherReport{
     margin-top: 10px;
     margin-bottom: 10px;
     float:center;
-    margin-right: 25%;
+    margin-right: 35%;
   }
 
   @media (max-width: 586px){

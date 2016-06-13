@@ -6,6 +6,7 @@ var dayforW =''
 var dayBool = false;
 var solBool = false;
 var sol = 0;
+var notThereSol = false;
 
 $(document).ready(init); 
 function init(){
@@ -145,23 +146,29 @@ function weather(){
     },
     error: function(error){
       console.log("Weather Error: " , error);
+      weatherURL =`http://marsweather.ingenology.com/v1/archive/?format=jsonp`;
       //console.log("Weather Error");
-      //$('.weatherReport').text('No Weather available for this date');
+      $('.weatherReport').text('No Weather available for this date');
     }
     });
   }
   else{
     $('.weatherReport').text(`...Loading Weather for sol ${sol}`);
     $('.weatherReport').show();
-    //console.log("weather");
+    console.log("url, ", weatherURL );
     $.ajax({
     url: weatherURL,
     method: 'GET', //defualt  is get, dont really need this
     dataType: 'jsonp',
     success: function(data){
       for(var i = 0; i<data.results.length; i++){
-          //console.log(data.results[i].sol);
-          console.log("sol: ", sol ," vs " , data.results[i].sol.toString() );
+          //console.log(data.results[i].sol);       
+          if(parseInt(sol) > data.results[i].sol){
+            console.log("BREAKKKK-----------------");
+            notThereSol = true;
+            break;
+          }
+          console.log("sol: ", parseInt(sol) ," vs " , data.results[i].sol);
           if(data.results[i].sol.toString() === sol){
             var weatherdata = data.results[i].atmo_opacity;
             var minFar = data.results[i].min_temp_fahrenheit;
@@ -175,17 +182,21 @@ function weather(){
             $('.weatherReport').text(`${weatherdata} -- High: ${maxFar} F Low: ${minFar} F`);
           }
         }
-        if(found === false){
+        if(found === false && notThereSol === false){
           var next = data.next;
           weatherURL = next;
           //console.log("next: " , next);
           weather();
         }
+        if(notThereSol === true){
+          $('.weatherReport').text('No Weather available for this date');
+        }
     },
     error: function(error){
       console.log("Weather Error: " , error);
+      weatherURL =`http://marsweather.ingenology.com/v1/archive/?format=jsonp`;
       //$('.weatherReport').text('');
-      //$('.weatherReport').text('No Weather available for this date');
+      $('.weatherReport').text('No Weather available for this date');
     }
     });
   }
