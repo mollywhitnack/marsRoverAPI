@@ -154,7 +154,7 @@ function weather(){
   else{
     $('.weatherReport').text(`...Loading Weather for sol ${sol}`);
     $('.weatherReport').show();
-    //console.log("url, ", weatherURL );
+    console.log("url, ", weatherURL );
     $.ajax({
     url: weatherURL,
     method: 'GET', //defualt  is get, dont really need this
